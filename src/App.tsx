@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { Simulate } from 'react-dom/test-utils';
+import dragOver = Simulate.dragOver;
 
 
 const App = () => {
@@ -63,6 +65,25 @@ const App = () => {
     setIngredients(countIngredients);
   };
 
+  const getBurger = () => {
+    let ingredName: string[] = [];
+
+    ingredients.forEach(ingredient => {
+      if(ingredient.count > 0) {
+        for (let i = 0; i < ingredient.count; i++) {
+          ingredName.push(ingredient.name);
+        }
+      }
+    });
+    return (
+      <>
+        {ingredName.map(ingredName => {
+          <div key={ingredName} className={ingredName}></div>
+        })}
+      </>
+    )
+  };
+
   return (
     <div className="container my-3">
       <div className="row justify-content-between">
@@ -99,7 +120,7 @@ const App = () => {
               <div className="Speeds1"></div>
               <div className="Speeds2"></div>
             </div>
-
+            {getBurger()}
             <div className="BreadBottom"></div>
           </div>
           <div>
