@@ -1,9 +1,85 @@
-.burge {
-  width: 390px;
-  height: 250px;
+.BreadBottom {
+  height: 17%;
+  width: 90%;
+  background: linear-gradient(#c45e38, #702e05);
+  border-radius: 0 0 30px 30px;
+  box-shadow: inset -15px 0 #c15711;
+  margin: 2% auto;
 }
 
-.BurgerDiv {
+.BreadTop {
+  height: 30%;
+  width: 80%;
+  background: linear-gradient(#c45e38, #702e05);
+  border-radius: 50% 50% 0 0;
+  box-shadow: inset -15px 0 #c15711;
+  margin: 2% auto;
+  position: relative;
+}
+
+.Meat {
+  width: 80%;
+  height: 8%;
+  background: linear-gradient(#7f3608, #702e05);
+  margin: 2% auto;
+  border-radius: 15px;
+}
+
+.Cheese {
+  width: 90%;
+  height: 4.5%;
+  margin: 2% auto;
+  background: linear-gradient(#a69324, #caae0d);
+  border-radius: 20px;
+}
+
+.Salad {
+  width: 85%;
+  height: 7%;
+  margin: 2% auto;
+  background: linear-gradient(#0ef303, #477a10);
+  border-radius: 20px;
+}
+
+.Bacon {
+  width: 80%;
+  height: 3%;
+  background: linear-gradient(#752e1a, #752b10);
+  margin: 2% auto;
+}
+
+.Burger {
+  width: 100%;
+  margin: auto;
+  height: 250px;
+  overflow: auto;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+@media (min-width: 1000px) and (min-height: 700px) {
+  .Burger {
+    width: 700px;
+    height: 600px;
+  }
+}
+
+@media (min-width: 500px) and (min-height: 401px) {
+  .Burger {
+    width: 450px;
+    height: 300px;
+  }
+}
+
+@media (min-width: 500px) and (max-height: 400px) {
+  .Burger {
+    width: 350px;
+    height: 200px;
+  }
+}
+
+.BurgerDiv{
   display: flex;
 }
 

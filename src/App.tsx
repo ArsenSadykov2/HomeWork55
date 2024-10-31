@@ -1,6 +1,10 @@
-import { useState } from 'react'
-import { Simulate } from 'react-dom/test-utils';
-import dragOver = Simulate.dragOver;
+import './App.css';
+import meatImage from "./assets/meat.png";
+import cheeseImage from "./assets/cheese.png";
+import baconImage from "./assets/bacon.png";
+import saladImage from "./assets/salad.png";
+import { Ingredient } from './types';
+import { useState } from 'react';
 
 
 const App = () => {
@@ -77,9 +81,9 @@ const App = () => {
     });
     return (
       <>
-        {ingredName.map(ingredName => {
-          <div key={ingredName} className={ingredName}></div>
-        })}
+          {ingredName.map(ingredName => {
+            <div key={ingredName} className={ingredName}></div>
+          })}
       </>
     )
   };
@@ -117,8 +121,6 @@ const App = () => {
           <hr/>
           <div className="Burger">
             <div className="BreadTop">
-              <div className="Speeds1"></div>
-              <div className="Speeds2"></div>
             </div>
             {getBurger()}
             <div className="BreadBottom"></div>
