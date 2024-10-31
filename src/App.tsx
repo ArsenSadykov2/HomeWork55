@@ -1,35 +1,114 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+
+const App = () => {
+  const INGREDIENTS: Ingredient[] = [
+    {name: 'Meat', price: 80, image: meatImage},
+    {name: 'Cheese', price: 50, image: cheeseImage},
+    {name: 'Bacon', price: 60, image: baconImage},
+    {name: 'Salad', price: 10, image: saladImage},
+  ];
+
+  const [ingredients, setIngredients] = useState([
+    {name: 'Meat', count: 0},
+    {name: 'Cheese', count: 0},
+    {name: 'Bacon', count: 0},
+    {name: 'Salad', count: 0},
+  ]);
+
+  const [total, setTotal] = useState<number>(30);
+
+  const addIngredients = (nameIngredient: string) => {
+    let countIngredients = ingredients.map(ingredient => {
+      if(ingredient.name === nameIngredient) {
+        return {
+          ...ingredient,
+          count: ingredient.count + 1
+        }
+      }
+      return ingredient;
+    });
+    let totalPrice = INGREDIENTS.reduce((acc, ingredient) => {
+      countIngredients.forEach(ingred => {
+        if(ingredient.name === ingred.name && ingred.count > 0) {
+          acc = acc + ingred.count * ingredient.price;
+        }
+      });
+      return acc;
+    }, 30);
+
+    setIngredients(countIngredients);
+    setTotal(totalPrice);
+  };
+
+  const deleteIngredient = (nameIngredient: string) => {
+    let countIngredients = ingredients.map(ingredient => {
+      if(ingredient.name === nameIngredient && ingredient.count > 0) {
+        return {
+          ...ingredient,
+          count: ingredient.count - 1
+        }
+      }
+      return ingredient;
+    });
+    let totalPrice = INGREDIENTS.reduce((acc, ingredient) => {
+      countIngredients.forEach(ingred => {
+        if(ingredient.name === ingred.name && ingred.count > 0) {
+          acc = acc + ingred.count * ingredient.price;
+        }
+      });
+      return acc;
+    }, 30);
+    setTotal(totalPrice);
+    setIngredients(countIngredients);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="container my-3">
+      <div className="row justify-content-between">
+        <div className="border border-black col me-3">
+          <h4 className="mt-2">Ingredients</h4>
+          <div className="row row-cols-2">
+            <div className="col">
+              {INGREDIENTS.map(ingredient => (
+                <div key={ingredient.name} className="mb-3">
+                  <button onClick={() => addIngredients(ingredient.name)} type="button" >
+                    <img width={80} src={ingredient.image} alt={ingredient.name}/>
+                    {ingredient.price}
+                  </button>
+                </div>
+              ))}
+            </div>
+            <div className="col">
+              {ingredients.map((ingredient) => (
+                <p><strong>{ingredient.name}</strong>{ingredient.count}
+                  <button onClick={() => deleteIngredient(ingredient.name)} className="deleteBtn"/>
+                </p>
+              ))}
+            </div>
+          </div>
+
+          <hr/>
+        </div>
+
+        <div className="border border-black col align-self-center">
+          <h4 className="mt-2">Burger</h4>
+          <hr/>
+          <div className="Burger">
+            <div className="BreadTop">
+              <div className="Speeds1"></div>
+              <div className="Speeds2"></div>
+            </div>
+
+            <div className="BreadBottom"></div>
+          </div>
+          <div>
+            <h5>Price:{total} </h5>
+          </div>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    </div>
+  );
+};
 
 export default App
